@@ -5,7 +5,22 @@ import { FiEdit3, FiTrash } from 'react-icons/fi';
 import { Container } from './styles';
 import api from '../../services/api';
 
-export default function Food({ food, handleDelete, handleEditFood }) {
+interface FoodItemProps {
+  id: number;
+  name: string;
+  description: string;
+  price: string;
+  image: string;
+  available: boolean;
+}
+
+interface FoodProps {
+  food: FoodItemProps;
+  handleDelete: (id: number) => void;
+  handleEditFood: (food: FoodItemProps) => void;
+}
+
+export default function Food({ food, handleDelete, handleEditFood }: FoodProps) {
   async function setEditingFood() {
     handleEditFood(food);
   }

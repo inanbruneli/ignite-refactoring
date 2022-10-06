@@ -6,17 +6,25 @@ import Modal from '../Modal';
 import Input from '../Input';
 import React from 'react';
 
+interface FoodItemProps {
+  id: number;
+  name: string;
+  description: string;
+  price: string;
+  image: string;
+  available: boolean;
+}
+
 interface ModalAddFoodProps {
   isOpen: boolean;
   setIsOpen: () => void;
-  handleAddFood: (data) => void;
+  handleAddFood: (data: FoodItemProps) => void;
 }
 
 export default function ModalAddFood({ isOpen, setIsOpen, handleAddFood }: ModalAddFoodProps) {
   const formRef = useRef(null);
 
-  async function handleSubmit(data) {
-
+  async function handleSubmit(data: FoodItemProps) {
     handleAddFood(data);
     setIsOpen();
   };
