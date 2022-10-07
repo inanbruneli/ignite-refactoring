@@ -33,12 +33,12 @@ export default function ModalAddFood({ isOpen, setIsOpen, handleAddFood }: Modal
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
       <Form ref={formRef} onSubmit={handleSubmit}>
         <h1>Novo Prato</h1>
-        <Input icon={null} name="image" placeholder="Cole o link aqui" />
+        <Input icon={''} name="image" placeholder="Cole o link aqui" />
 
-        <Input icon={null} name="name" placeholder="Ex: Moda Italiana" />
-        <Input icon={null} name="price" placeholder="Ex: 19.90" />
+        <Input icon={''} name="name" placeholder="Ex: Moda Italiana" />
+        <Input icon={''} name="price" placeholder="Ex: 19.90" />
 
-        <Input icon={null} name="description" placeholder="Descrição" />
+        <Input icon={''} name="description" placeholder="Descrição" />
         <button type="submit" data-testid="add-food-button">
           <p className="text">Adicionar Prato</p>
           <div className="icon">

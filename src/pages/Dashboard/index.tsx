@@ -9,18 +9,19 @@ import ModalEditFood from '../../components/ModalEditFood';
 import { FoodsContainer } from './styles';
 
 interface FoodItemProps {
-  id: number;
-  name: string;
-  description: string;
-  price: string;
-  image: string;
-  available: boolean;
+  id?: number;
+  name?: string;
+  description?: string;
+  price?: string;
+  image?: string;
+  available?: boolean;
 }
 
-
 export default function Dashboard() {
-  const [foods, setFoods] = useState([]);
-  const [editingFood, setEditingFood] = useState({});
+  const low: Array<FoodItemProps> = [];
+  const high: FoodItemProps = {};
+  const [foods, setFoods] = useState(low);
+  const [editingFood, setEditingFood] = useState(high);
   const [modalOpen, setModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
 
@@ -40,8 +41,8 @@ export default function Dashboard() {
         available: true,
       });
 
-      const oldFoods: FoodItemProps = foods;
-      setFoods(...oldFoods, response.data);
+      const newFoods: Array<FoodItemProps> = [...foods, response.data];
+      setFoods(newFoods);
     } catch (err) {
       console.log(err);
     }
@@ -64,7 +65,7 @@ export default function Dashboard() {
     }
   }
 
-  async function handleDeleteFood(id) {
+  async function handleDeleteFood(id: number) {
     await api.delete(`/foods/${id}`);
     const foodsFiltered = foods.filter(food => food.id !== id);
     setFoods(foodsFiltered);
@@ -78,24 +79,24 @@ export default function Dashboard() {
     setEditModalOpen(!editModalOpen);
   }
 
-  async function handleEditFood(food) {
+  async function handleEditFood(food: FoodItemProps) {
     setEditingFood(food);
     setEditModalOpen(true);
   }
 
   return (
     <>
-      <Header openModal={this.toggleModal} />
+      <Header openModal={toggleModal} />
       <ModalAddFood
         isOpen={modalOpen}
-        setIsOpen={this.toggleModal}
-        handleAddFood={this.handleAddFood}
+        setIsOpen={toggleModal}
+        handleAddFood={handleAddFood}
       />
       <ModalEditFood
         isOpen={editModalOpen}
-        setIsOpen={this.toggleEditModal}
+        setIsOpen={toggleEditModal}
         editingFood={editingFood}
-        handleUpdateFood={this.handleUpdateFood}
+        handleUpdateFood={handleUpdateFood}
       />
 
       <FoodsContainer data-testid="foods-list">
@@ -104,8 +105,8 @@ export default function Dashboard() {
             <Food
               key={food.id}
               food={food}
-              handleDelete={this.handleDeleteFood}
-              handleEditFood={this.handleEditFood}
+              handleDelete={handleDeleteFood}
+              handleEditFood={handleEditFood}
             />
           ))}
       </FoodsContainer>

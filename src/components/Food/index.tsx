@@ -6,12 +6,12 @@ import { Container } from './styles';
 import api from '../../services/api';
 
 interface FoodItemProps {
-  id: number;
-  name: string;
-  description: string;
-  price: string;
-  image: string;
-  available: boolean;
+  id?: number;
+  name?: string;
+  description?: string;
+  price?: string;
+  image?: string;
+  available?: boolean;
 }
 
 interface FoodProps {
